@@ -11,14 +11,20 @@ interface CardProps {
 	children: JSX.Element;
 }
 
-export default function Card({
+/**
+ * Renders card for repo or user
+ *
+ * @class      Card
+ * @return     {JSX.Element}
+ */
+const Card: React.FC<CardProps> = ({
 	header,
 	subheader,
 	avatar,
 	href,
 	name,
 	children,
-}: CardProps): JSX.Element {
+}: CardProps): JSX.Element => {
 	return (
 		<ThemeConsumer>
 			{({ theme }: AppState): JSX.Element => (
@@ -40,7 +46,7 @@ export default function Card({
 			)}
 		</ThemeConsumer>
 	);
-}
+};
 
 Card.propTypes = {
 	header: PropTypes.string.isRequired,
@@ -49,3 +55,5 @@ Card.propTypes = {
 	href: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 };
+
+export default Card;

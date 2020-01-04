@@ -64,6 +64,11 @@ function sortPlayers(players: [UserData, UserData]): [UserData, UserData] {
 	return players.sort((a, b) => b.score - a.score);
 }
 
+/**
+ * Takes two player strings and gives back results object comparing their data
+ *
+ * @param      {[string, string]}  players  The players
+ */
 export function battle(
 	players: [string, string]
 ): Promise<[UserData, UserData]> {
@@ -73,6 +78,11 @@ export function battle(
 	]).then((results: [UserData, UserData]) => sortPlayers(results));
 }
 
+/**
+ * Fetches popular repos.
+ *
+ * @param      {string}  language  The language
+ */
 export function fetchPopularRepos(
 	language: possibleLanguage
 ): Promise<Array<GitHubRepoItem>> {

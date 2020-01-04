@@ -9,7 +9,12 @@ import {
 import { ThemeConsumer } from '../contexts/theme';
 import { Link } from 'react-router-dom';
 
-function Instructions(): JSX.Element {
+/**
+ * Renders instructions for Battle
+ *
+ * @class      Instructions
+ */
+const Instructions: React.FC = (): JSX.Element => {
 	return (
 		<ThemeConsumer>
 			{({ theme }: AppState): JSX.Element => (
@@ -47,7 +52,7 @@ function Instructions(): JSX.Element {
 			)}
 		</ThemeConsumer>
 	);
-}
+};
 
 interface PlayerInputProps extends React.Props<PlayerInput> {
 	label: string;
@@ -57,11 +62,17 @@ interface PlayerInputProps extends React.Props<PlayerInput> {
 interface PlayerInputState {
 	username: string;
 }
+/**
+ * Controlled component for user input on Battle page.
+ *
+ * @class      PlayerInput
+ */
+class PlayerInput extends React.Component<PlayerInputProps, PlayerInputState> {
+	static propTypes = {
+		onSubmit: PropTypes.func.isRequired,
+		label: PropTypes.string.isRequired,
+	};
 
-class PlayerInput extends React.Component<
-	PlayerInputProps,
-	Readonly<PlayerInputState>
-> {
 	state = {
 		username: '',
 	};
@@ -110,22 +121,25 @@ class PlayerInput extends React.Component<
 			</ThemeConsumer>
 		);
 	}
-
-	static propTypes = {
-		onSubmit: PropTypes.func.isRequired,
-		label: PropTypes.string.isRequired,
-	};
 }
 
-function PlayerPreview({
-	username,
-	onReset,
-	label,
-}: {
+interface PlayerPrevewProps {
 	username: string;
 	onReset: () => void;
 	label: string;
-}): JSX.Element {
+}
+
+/**
+ * Renders preview of user after name is inputted
+ *
+ * @class      PlayerPreview
+ * @return     {JSX.Element}
+ */
+const PlayerPreview: React.FC<PlayerPrevewProps> = ({
+	username,
+	onReset,
+	label,
+}: PlayerPrevewProps): JSX.Element => {
 	return (
 		<ThemeConsumer>
 			{({ theme }: AppState): JSX.Element => (
@@ -156,7 +170,7 @@ function PlayerPreview({
 			)}
 		</ThemeConsumer>
 	);
-}
+};
 
 PlayerPreview.propTypes = {
 	username: PropTypes.string.isRequired,
@@ -169,7 +183,12 @@ interface BattleState {
 	playerTwo: string;
 }
 
-export default class Battle extends React.Component<{}, Readonly<BattleState>> {
+/**
+ * Sets up state and inputs to battle two Github accounts.
+ *
+ * @class      Battle (name)
+ */
+export default class Battle extends React.Component<{}, BattleState> {
 	state = {
 		playerOne: null,
 		playerTwo: null,

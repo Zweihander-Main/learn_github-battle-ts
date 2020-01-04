@@ -10,7 +10,12 @@ const Popular = React.lazy(() => import('./components/Popular'));
 const Battle = React.lazy(() => import('./components/Battle'));
 const Results = React.lazy(() => import('./components/Results'));
 
-class App extends React.Component<{}, Readonly<AppState>> {
+/**
+ * Sets up application including theme context and routing
+ *
+ * @class      App (name)
+ */
+class App extends React.Component<{}, AppState> {
 	state = {
 		theme: 'light',
 		toggleTheme: (): void => {

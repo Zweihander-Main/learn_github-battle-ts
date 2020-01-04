@@ -5,8 +5,13 @@ import { NavLink } from 'react-router-dom';
 const activeStyle = {
 	color: 'rgb(187,46,31)',
 };
-
-export default function Nav(): JSX.Element {
+/**
+ * Renders a navigation bar with links to two different GitHub related pages
+ *
+ * @class      Nav
+ * @return     {JSX.Element}
+ */
+const Nav: React.FC = (): JSX.Element => {
 	return (
 		<ThemeConsumer>
 			{({ theme, toggleTheme }: AppState): JSX.Element => (
@@ -43,4 +48,6 @@ export default function Nav(): JSX.Element {
 			)}
 		</ThemeConsumer>
 	);
-}
+};
+
+export default Nav;

@@ -16,13 +16,13 @@ interface GitHubReponse {
 }
 
 interface GitHubUsersResponse extends GitHubReponse {
-	name: string;
+	name?: string;
 	followers: number;
-	location: string;
-	company: string;
+	location?: string;
+	company?: string;
 	avatar_url: string;
 	login: string;
-	html_url: string;
+	html_url?: string;
 	following: number;
 }
 

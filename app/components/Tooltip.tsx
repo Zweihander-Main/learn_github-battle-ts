@@ -29,7 +29,16 @@ interface TooltipProps {
 	children?: React.ReactNode;
 }
 
-export default function Tooltip({ text, children }: TooltipProps): JSX.Element {
+/**
+ * Renders a tooltip with information over component
+ *
+ * @class      Tooltip (name)
+ * @return     {<type>}  { description_of_the_return_value }
+ */
+const Tooltip: React.FC<TooltipProps> = ({
+	text,
+	children,
+}: TooltipProps): JSX.Element => {
 	return (
 		<Hover>
 			{(hovering: boolean): JSX.Element => (
@@ -42,8 +51,10 @@ export default function Tooltip({ text, children }: TooltipProps): JSX.Element {
 			)}
 		</Hover>
 	);
-}
+};
 
 Tooltip.propTypes = {
 	text: PropTypes.string.isRequired,
 };
+
+export default Tooltip;

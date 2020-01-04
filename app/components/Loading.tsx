@@ -21,11 +21,27 @@ interface LoadingState {
 	content: string;
 }
 
+/**
+ * Displays loading text for use when fetching data from an API
+ *
+ * @class      Loading
+ */
 export default class Loading extends React.Component<
 	LoadingProps,
-	Readonly<LoadingState>
+	LoadingState
 > {
 	interval: number;
+
+	static propTypes = {
+		text: PropTypes.string.isRequired,
+		speed: PropTypes.number.isRequired,
+	};
+
+	static defaultProps = {
+		text: 'Loading',
+		speed: 300,
+	};
+
 	state = {
 		content: this.props.text,
 	};
@@ -51,14 +67,4 @@ export default class Loading extends React.Component<
 	render(): JSX.Element {
 		return <p style={styles.content}>{this.state.content}</p>;
 	}
-
-	static propTypes = {
-		text: PropTypes.string.isRequired,
-		speed: PropTypes.number.isRequired,
-	};
-
-	static defaultProps = {
-		text: 'Loading',
-		speed: 300,
-	};
 }

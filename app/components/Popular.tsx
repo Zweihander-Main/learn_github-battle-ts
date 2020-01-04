@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { fetchPopularRepos } from '../utils/api';
+import { possibleLanguage as propTypesPossibleLanguage } from '../globals.PropTypes';
 import {
 	FaUser,
 	FaStar,
@@ -11,13 +12,21 @@ import Card from './Card';
 import Loading from './Loading';
 import Tooltip from './Tooltip';
 
-function LanguagesNav({
-	selected,
-	onUpdateLanguage,
-}: {
+interface LanguagesNavProps {
 	selected: possibleLanguage;
 	onUpdateLanguage: (possibleLanguage) => void;
-}): JSX.Element {
+}
+
+/**
+ * Renders navigation to switch between languages
+ *
+ * @class      LanguagesNav
+ * @return     {JSX.Element}
+ */
+const LanguagesNav: React.FC<LanguagesNavProps> = ({
+	selected,
+	onUpdateLanguage,
+}: LanguagesNavProps): JSX.Element => {
 	const languages: Array<possibleLanguage> = [
 		'All',
 		'JavaScript',
@@ -50,9 +59,26 @@ function LanguagesNav({
 			})}
 		</ul>
 	);
+};
+
+LanguagesNav.propTypes = {
+	selected: propTypesPossibleLanguage.isRequired,
+	onUpdateLanguage: PropTypes.func.isRequired,
+};
+
+interface ReposGridProps {
+	repos: Array<GitHubRepoItem>;
 }
 
-function ReposGrid({ repos }: { repos: Array<GitHubRepoItem> }): JSX.Element {
+/**
+ * Renders grid of repositories with meta information
+ *
+ * @class      ReposGrid
+ * @return     {JSX.Element}
+ */
+const ReposGrid: React.FC<ReposGridProps> = ({
+	repos,
+}: ReposGridProps): JSX.Element => {
 	return (
 		<ul className="grid space-around">
 			{repos.map((repo: GitHubRepoItem, index: number) => {
@@ -110,11 +136,6 @@ function ReposGrid({ repos }: { repos: Array<GitHubRepoItem> }): JSX.Element {
 			})}
 		</ul>
 	);
-}
-
-LanguagesNav.propTypes = {
-	selected: PropTypes.string.isRequired,
-	onUpdateLanguage: PropTypes.func.isRequired,
 };
 
 interface PopularState {
@@ -123,10 +144,13 @@ interface PopularState {
 	repos: Record<possibleLanguage, Array<GitHubRepoItem>>;
 }
 
-export default class Popular extends React.Component<
-	{},
-	Readonly<PopularState>
-> {
+/**
+ * Fetches data of popular repos and renders them in a grid navigable by
+ * language
+ *
+ * @class      Popular
+ */
+export default class Popular extends React.Component<{}, PopularState> {
 	state = {
 		selectedLanguage: 'All' as possibleLanguage,
 		repos: {} as Record<possibleLanguage, Array<GitHubRepoItem>>,

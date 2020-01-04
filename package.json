@@ -1,13 +1,14 @@
 {
-	"name": "github-battle",
+	"name": "github-battle-ts",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Github Battle app from Tyler McGinnis in TypeScript",
 	"main": "index.js",
 	"scripts": {
 		"dev": "webpack-dev-server --config webpack.dev.js",
 		"build": "NODE_ENV='production' webpack --config webpack.prod.js",
 		"build-win": "SET NODE_ENV='production' && webpack --config webpack.prod.js"
 	},
+	"private": true,
 	"author": "Zweihänder",
 	"license": "MIT",
 	"babel": {

@@ -8,10 +8,12 @@ interface HoverState {
 	hovering: boolean;
 }
 
-export default class Hover extends React.Component<
-	HoverProps,
-	Readonly<HoverState>
-> {
+/**
+ * Hover Render Prop to allow adding hovering state to a component
+ *
+ * @class      Hover (name)
+ */
+export default class Hover extends React.Component<HoverProps, HoverState> {
 	state = {
 		hovering: false,
 	};
