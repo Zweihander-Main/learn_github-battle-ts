@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface HoverProps extends React.Props<Hover> {
-	children: (hovering: boolean) => JSX.Element;
+	children: (hovering: boolean) => React.ReactNode;
 }
 
 interface HoverState {
@@ -14,7 +14,7 @@ interface HoverState {
  * @class      Hover (name)
  */
 export default class Hover extends React.Component<HoverProps, HoverState> {
-	state = {
+	state: HoverState = {
 		hovering: false,
 	};
 
@@ -30,7 +30,7 @@ export default class Hover extends React.Component<HoverProps, HoverState> {
 		});
 	};
 
-	render(): JSX.Element {
+	render(): React.ReactNode {
 		return (
 			<div onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
 				{this.props.children(this.state.hovering)}

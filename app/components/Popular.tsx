@@ -21,12 +21,12 @@ interface LanguagesNavProps {
  * Renders navigation to switch between languages
  *
  * @class      LanguagesNav
- * @return     {JSX.Element}
+ * @return     {React.ReactNode}
  */
 const LanguagesNav: React.FC<LanguagesNavProps> = ({
 	selected,
 	onUpdateLanguage,
-}: LanguagesNavProps): JSX.Element => {
+}: LanguagesNavProps) => {
 	const languages: Array<possibleLanguage> = [
 		'All',
 		'JavaScript',
@@ -74,11 +74,9 @@ interface ReposGridProps {
  * Renders grid of repositories with meta information
  *
  * @class      ReposGrid
- * @return     {JSX.Element}
+ * @return     {React.ReactNode}
  */
-const ReposGrid: React.FC<ReposGridProps> = ({
-	repos,
-}: ReposGridProps): JSX.Element => {
+const ReposGrid: React.FC<ReposGridProps> = ({ repos }: ReposGridProps) => {
 	return (
 		<ul className="grid space-around">
 			{repos.map((repo: GitHubRepoItem, index: number) => {
@@ -150,8 +148,11 @@ interface PopularState {
  *
  * @class      Popular
  */
-export default class Popular extends React.Component<{}, PopularState> {
-	state = {
+export default class Popular extends React.Component<
+	Record<null, null>,
+	PopularState
+> {
+	state: PopularState = {
 		selectedLanguage: 'All' as possibleLanguage,
 		repos: {} as Record<possibleLanguage, Array<GitHubRepoItem>>,
 		error: null,
@@ -203,7 +204,7 @@ export default class Popular extends React.Component<{}, PopularState> {
 		return !repos[selectedLanguage] && error === null;
 	};
 
-	render(): JSX.Element {
+	render(): React.ReactNode {
 		const { selectedLanguage, repos, error } = this.state;
 		return (
 			<React.Fragment>

@@ -2,14 +2,14 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Hover from './Hover';
 
-const styles = {
+const styles: Record<string, React.CSSProperties> = {
 	container: {
-		position: 'relative' as 'relative',
-		display: 'flex' as 'flex',
+		position: 'relative',
+		display: 'flex',
 	},
 	tooltip: {
-		boxSizing: 'border-box' as 'border-box',
-		position: 'absolute' as 'absolute',
+		boxSizing: 'border-box',
+		position: 'absolute',
 		width: '160px',
 		bottom: '100%',
 		left: '50%',
@@ -19,7 +19,7 @@ const styles = {
 		padding: '7px',
 		marginBottom: '5px',
 		color: '#fff',
-		textAlign: 'center' as 'center',
+		textAlign: 'center',
 		fontSize: '14px',
 	},
 };
@@ -35,13 +35,10 @@ interface TooltipProps {
  * @class      Tooltip (name)
  * @return     {<type>}  { description_of_the_return_value }
  */
-const Tooltip: React.FC<TooltipProps> = ({
-	text,
-	children,
-}: TooltipProps): JSX.Element => {
+const Tooltip: React.FC<TooltipProps> = ({ text, children }: TooltipProps) => {
 	return (
 		<Hover>
-			{(hovering: boolean): JSX.Element => (
+			{(hovering: boolean): React.ReactNode => (
 				<div style={styles.container}>
 					{hovering === true && (
 						<div style={styles.tooltip}>{text}</div>

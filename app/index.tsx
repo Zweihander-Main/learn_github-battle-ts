@@ -15,7 +15,7 @@ const Results = React.lazy(() => import('./components/Results'));
  *
  * @class      App (name)
  */
-class App extends React.Component<{}, AppState> {
+class App extends React.Component<Record<null, null>, AppState> {
 	state = {
 		theme: 'light',
 		toggleTheme: (): void => {
@@ -25,7 +25,7 @@ class App extends React.Component<{}, AppState> {
 		},
 	} as AppState;
 
-	render(): JSX.Element {
+	render(): React.ReactNode {
 		return (
 			<Router>
 				<ThemeProvider value={this.state}>
@@ -45,7 +45,9 @@ class App extends React.Component<{}, AppState> {
 										component={Results}
 									/>
 									<Route
-										render={(): JSX.Element => <h1>404</h1>}
+										render={(): React.ReactNode => (
+											<h1>404</h1>
+										)}
 									/>
 								</Switch>
 							</React.Suspense>

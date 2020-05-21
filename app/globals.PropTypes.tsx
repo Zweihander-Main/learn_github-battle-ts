@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import * as PropTypes from 'prop-types';
 
 export const possibleLanguage = PropTypes.oneOf([
@@ -79,5 +78,3 @@ export const UserData = PropTypes.shape({
 	profile: GitHubUsersResponse,
 	score: PropTypes.number.isRequired,
 });
-
-/* eslint-enable */

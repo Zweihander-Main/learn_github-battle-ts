@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import { GitHubUsersResponse as propTypesGitHubUsersReponse } from '../globals.PropTypes';
 import { battle } from '../utils/api';
 import { FaCompass, FaUsers, FaUserFriends, FaUser } from 'react-icons/fa';
@@ -17,11 +16,11 @@ interface ProfileListProps {
  * Renders information in a user profile
  *
  * @class      ProfileList
- * @return     {JSX.Element}
+ * @return     {React.ReactNode}
  */
 const ProfileList: React.FC<ProfileListProps> = ({
 	profile,
-}: ProfileListProps): JSX.Element => {
+}: ProfileListProps) => {
 	return (
 		<ul className="card-list">
 			<li>
@@ -76,7 +75,7 @@ export default class Results extends React.Component<
 	RouteComponentProps,
 	ResultsState
 > {
-	state = {
+	state: ResultsState = {
 		winner: null,
 		loser: null,
 		error: null,
@@ -105,7 +104,7 @@ export default class Results extends React.Component<
 			});
 	}
 
-	render(): JSX.Element {
+	render(): React.ReactNode {
 		const { winner, loser, error, loading } = this.state;
 
 		if (loading === true) {

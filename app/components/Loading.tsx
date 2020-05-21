@@ -1,15 +1,13 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-const styles = {
-	content: {
-		fontSize: '35px',
-		position: 'absolute' as 'absolute',
-		left: '0',
-		right: '0',
-		marginTop: '20px',
-		textAlign: 'center' as 'center',
-	},
+const styles: React.CSSProperties = {
+	fontSize: '35px',
+	position: 'absolute',
+	left: '0',
+	right: '0',
+	marginTop: '20px',
+	textAlign: 'center',
 };
 
 interface LoadingProps extends React.Props<Loading> {
@@ -42,7 +40,7 @@ export default class Loading extends React.Component<
 		speed: 300,
 	};
 
-	state = {
+	state: LoadingState = {
 		content: this.props.text,
 	};
 
@@ -64,7 +62,7 @@ export default class Loading extends React.Component<
 		window.clearInterval(this.interval);
 	}
 
-	render(): JSX.Element {
-		return <p style={styles.content}>{this.state.content}</p>;
+	render(): React.ReactNode {
+		return <p style={styles}>{this.state.content}</p>;
 	}
 }

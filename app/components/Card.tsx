@@ -8,14 +8,14 @@ interface CardProps {
 	avatar: string;
 	href: string;
 	name: string;
-	children: JSX.Element;
+	children: React.ReactNode;
 }
 
 /**
  * Renders card for repo or user
  *
  * @class      Card
- * @return     {JSX.Element}
+ * @return     {React.ReactNode}
  */
 const Card: React.FC<CardProps> = ({
 	header,
@@ -24,10 +24,10 @@ const Card: React.FC<CardProps> = ({
 	href,
 	name,
 	children,
-}: CardProps): JSX.Element => {
+}: CardProps) => {
 	return (
 		<ThemeConsumer>
-			{({ theme }: AppState): JSX.Element => (
+			{({ theme }: AppState): React.ReactNode => (
 				<div className={`card bg-${theme}`}>
 					<h4 className="header-lg center-text">{header}</h4>
 					<img

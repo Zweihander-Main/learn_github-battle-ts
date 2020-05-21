@@ -14,10 +14,10 @@ import { Link } from 'react-router-dom';
  *
  * @class      Instructions
  */
-const Instructions: React.FC = (): JSX.Element => {
+const Instructions: React.FC = () => {
 	return (
 		<ThemeConsumer>
-			{({ theme }: AppState): JSX.Element => (
+			{({ theme }: AppState): React.ReactNode => (
 				<div className="instructions-container">
 					<h1 className="center-text header-lg">Instructions</h1>
 					<ol className="container-sm grid center-text battle-instructions">
@@ -56,7 +56,7 @@ const Instructions: React.FC = (): JSX.Element => {
 
 interface PlayerInputProps extends React.Props<PlayerInput> {
 	label: string;
-	onSubmit: Function;
+	onSubmit: (player: string) => void;
 }
 
 interface PlayerInputState {
@@ -73,7 +73,7 @@ class PlayerInput extends React.Component<PlayerInputProps, PlayerInputState> {
 		label: PropTypes.string.isRequired,
 	};
 
-	state = {
+	state: PlayerInputState = {
 		username: '',
 	};
 
@@ -86,10 +86,10 @@ class PlayerInput extends React.Component<PlayerInputProps, PlayerInputState> {
 		this.setState({ username: event.target.value });
 	};
 
-	render(): JSX.Element {
+	render(): React.ReactNode {
 		return (
 			<ThemeConsumer>
-				{({ theme }: AppState): JSX.Element => (
+				{({ theme }: AppState): React.ReactNode => (
 					<form
 						className="column player"
 						onSubmit={this.handleSubmit}
@@ -133,16 +133,16 @@ interface PlayerPrevewProps {
  * Renders preview of user after name is inputted
  *
  * @class      PlayerPreview
- * @return     {JSX.Element}
+ * @return     {React.ReactNode}
  */
 const PlayerPreview: React.FC<PlayerPrevewProps> = ({
 	username,
 	onReset,
 	label,
-}: PlayerPrevewProps): JSX.Element => {
+}: PlayerPrevewProps) => {
 	return (
 		<ThemeConsumer>
-			{({ theme }: AppState): JSX.Element => (
+			{({ theme }: AppState): React.ReactNode => (
 				<div className="column player">
 					<h3 className="player-label">{label}</h3>
 					<div className={`row bg-${theme}`}>
@@ -184,12 +184,15 @@ interface BattleState {
 }
 
 /**
- * Sets up state and inputs to battle two Github accounts.
+ * Sets up state and inputs to battle two GitHub accounts.
  *
  * @class      Battle (name)
  */
-export default class Battle extends React.Component<{}, BattleState> {
-	state = {
+export default class Battle extends React.Component<
+	Record<null, null>,
+	BattleState
+> {
+	state: BattleState = {
 		playerOne: null,
 		playerTwo: null,
 	};
@@ -206,7 +209,7 @@ export default class Battle extends React.Component<{}, BattleState> {
 		} as Record<'playerOne' | 'playerTwo', string>);
 	};
 
-	render(): JSX.Element {
+	render(): React.ReactNode {
 		const { playerOne, playerTwo } = this.state;
 
 		return (

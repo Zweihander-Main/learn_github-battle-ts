@@ -2,19 +2,19 @@ import * as React from 'react';
 import { ThemeConsumer } from '../contexts/theme';
 import { NavLink } from 'react-router-dom';
 
-const activeStyle = {
+const activeStyle: React.CSSProperties = {
 	color: 'rgb(187,46,31)',
 };
 /**
  * Renders a navigation bar with links to two different GitHub related pages
  *
  * @class      Nav
- * @return     {JSX.Element}
+ * @return     {React.ReactNode}
  */
-const Nav: React.FC = (): JSX.Element => {
+const Nav: React.FC = () => {
 	return (
 		<ThemeConsumer>
-			{({ theme, toggleTheme }: AppState): JSX.Element => (
+			{({ theme, toggleTheme }: AppState): React.ReactNode => (
 				<nav className="row space-between">
 					<ul className="row nav">
 						<li>
