@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { GitHubUsersResponse as propTypesGitHubUsersReponse } from '../globals.PropTypes';
+import {
+	GitHubUsersResponsePT as propTypesGitHubUsersReponse,
+	GitHubUsersResponse,
+	UserData,
+} from '../types';
 import { battle } from '../utils/api';
 import { FaCompass, FaUsers, FaUserFriends, FaUser } from 'react-icons/fa';
 import Card from './Card';

@@ -211,7 +211,7 @@ li {
 	align-items: center;
 	cursor: pointer;
 	text-decoration: none;
-	max-width: 200 px;
+	max-width: 200px;
 }
 
 .dark-btn {
@@ -231,7 +231,7 @@ li {
 .avatar-small {
 	width: 55px;
 	height: 55px;
-	border-right: 50%;
+	border-radius: 50%;
 }
 
 .player-info {
@@ -242,7 +242,7 @@ li {
 	padding: 10px;
 }
 
-.player-info link {
+.player-info .link {
 	margin-left: 10px;
 }
 

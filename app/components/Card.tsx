@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ThemeConsumer } from '../contexts/theme';
+import { AppState } from '../types';
 
 interface CardProps {
 	header: string;

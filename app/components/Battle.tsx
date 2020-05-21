@@ -8,6 +8,7 @@ import {
 } from 'react-icons/fa';
 import { ThemeConsumer } from '../contexts/theme';
 import { Link } from 'react-router-dom';
+import { AppState } from '../types';
 
 /**
  * Renders instructions for Battle
@@ -40,7 +41,7 @@ const Instructions: React.FC = () => {
 							/>
 						</li>
 						<li>
-							<h3 className="header-sm">See the winners</h3>
+							<h3 className="header-sm">See the winner</h3>
 							<FaTrophy
 								className={`bg-${theme}`}
 								color="rgb(255, 215,0)"

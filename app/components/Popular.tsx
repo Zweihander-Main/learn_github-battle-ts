@@ -1,7 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { fetchPopularRepos } from '../utils/api';
-import { possibleLanguage as propTypesPossibleLanguage } from '../globals.PropTypes';
+import {
+	possibleLanguagePT as propTypesPossibleLanguage,
+	possibleLanguage,
+	GitHubRepoItem,
+} from '../types';
 import {
 	FaUser,
 	FaStar,
@@ -42,7 +46,7 @@ const LanguagesNav: React.FC<LanguagesNavProps> = ({
 				return (
 					<li key={language}>
 						<button
-							className="btn-clean nav-link"
+							className="btn-clear nav-link"
 							style={
 								language === selected
 									? { color: 'rgb(187,46,31)' }
@@ -126,6 +130,7 @@ const ReposGrid: React.FC<ReposGridProps> = ({ repos }: ReposGridProps) => {
 										size={22}
 									/>
 									{openIssuesCount.toLocaleString()} open
+									issues
 								</li>
 							</ul>
 						</Card>
