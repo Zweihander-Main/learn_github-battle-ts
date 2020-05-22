@@ -33,7 +33,6 @@ interface TooltipProps {
  * Renders a tooltip with information over component
  *
  * @class      Tooltip (name)
- * @return     {<type>}  { description_of_the_return_value }
  */
 const Tooltip: React.FC<TooltipProps> = ({ text, children }: TooltipProps) => {
 	return (
