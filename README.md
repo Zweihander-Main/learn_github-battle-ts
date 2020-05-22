@@ -1,13 +1,19 @@
 # Github-Battle-TS
 
-> TypeScript implementation of GitHub battle app originally by [tylermcginnis](https://github.com/tylermcginnis/). [Live demo](https://github-battle.zweisolutions.com)
+> TypeScript implementation of GitHub battle app (using Hooks) originally by [tylermcginnis](https://github.com/tylermcginnis/). [Live demo](https://github-battle.zweisolutions.com)
 
 ### Tech stack:
 
 -   TypeScript
--   React
+-   React + Hooks
 -   React-router
+-   Jest
+-   React Testing Library
 -   Webpack
+
+### Additions to original:
+
+-   Added Jest snapshot testing for most of the components
 
 ### Live demo:
 
@@ -25,6 +31,8 @@
 -   `npm run dev`: Create development build and serve it on dev server
 -   `npm run build`: Build application for production (build directory: dist)
 -   `npm run build-win`: Build application for production in Windows
+-   `npm run test`: Run tests
+-   `npm run testWatch`: Run tests in watch mode
 
 ### Current TODOs:
 
