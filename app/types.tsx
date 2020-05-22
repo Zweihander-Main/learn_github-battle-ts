@@ -8,10 +8,7 @@ export type possibleLanguage =
 	| 'CSS'
 	| 'Python';
 
-export interface AppState {
-	theme: 'light' | 'dark';
-	toggleTheme: () => void;
-}
+export type AppState = 'light' | 'dark';
 
 export interface GitHubReponse {
 	message?: string;

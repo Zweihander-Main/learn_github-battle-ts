@@ -141,91 +141,89 @@ const ReposGrid: React.FC<ReposGridProps> = ({ repos }: ReposGridProps) => {
 	);
 };
 
-interface PopularState {
-	selectedLanguage: possibleLanguage;
+type PopularReducerState = {
 	error: string;
-	repos: Record<possibleLanguage, Array<GitHubRepoItem>>;
+} & Record<possibleLanguage, Array<GitHubRepoItem>>;
+
+type PopularReducerAction =
+	| {
+			type: 'success';
+			repos: Array<GitHubRepoItem>;
+			selectedLanguage: possibleLanguage;
+	  }
+	| { type: 'error'; error: { message: string } }
+	| { type: null; repos: null; selectedLanguage: null; error: null };
+
+function popularReducer(
+	state: PopularReducerState,
+	action: PopularReducerAction
+): PopularReducerState {
+	switch (action.type) {
+		case 'success': {
+			return {
+				...state,
+				[action.selectedLanguage]: action.repos,
+				error: null,
+			};
+		}
+		case 'error': {
+			return {
+				...state,
+				error: action.error.message,
+			};
+		}
+		default:
+			return state;
+	}
 }
 
 /**
  * Fetches data of popular repos and renders them in a grid navigable by
  * language
- *
- * @class      Popular
  */
-export default class Popular extends React.Component<
-	Record<null, null>,
-	PopularState
-> {
-	state: PopularState = {
-		selectedLanguage: 'All' as possibleLanguage,
-		repos: {} as Record<possibleLanguage, Array<GitHubRepoItem>>,
+const Popular: React.FC = () => {
+	const [selectedLanguage, setSelectedLanguage] = React.useState<
+		possibleLanguage
+	>('All');
+
+	const [state, dispatch] = React.useReducer(popularReducer, {
 		error: null,
-	};
+	} as PopularReducerState);
 
-	componentDidMount(): void {
-		this.updateLanguage(this.state.selectedLanguage);
-	}
+	const fetchedLanguages = React.useRef<Array<possibleLanguage>>([]);
 
-	updateLanguage = (selectedLanguage: possibleLanguage): void => {
-		this.setState({
-			selectedLanguage,
-			error: null,
-		});
-
-		if (!this.state.repos[selectedLanguage]) {
+	React.useEffect(() => {
+		if (fetchedLanguages.current.includes(selectedLanguage) === false) {
+			fetchedLanguages.current.push(selectedLanguage);
 			fetchPopularRepos(selectedLanguage)
-				.then((data: Array<GitHubRepoItem>) =>
-					this.setState(
-						({
-							repos,
-						}: {
-							repos: Record<
-								possibleLanguage,
-								Array<GitHubRepoItem>
-							>;
-						}) => {
-							return {
-								repos: {
-									...repos,
-									[selectedLanguage]: data,
-								},
-							};
-						}
-					)
+				.then((repos) =>
+					dispatch({ type: 'success', selectedLanguage, repos })
 				)
-				.catch((e: string) => {
-					console.warn('Error fetching repos: ', e);
-
-					this.setState({
-						error: 'There was an error fetching the repositories.',
-					});
-				});
+				.catch((error: { message: string }) =>
+					dispatch({ type: 'error', error })
+				);
 		}
+	}, [fetchedLanguages, selectedLanguage]);
+
+	const isLoading = (): boolean => {
+		return !state[selectedLanguage] && state.error === null;
 	};
 
-	isLoading = (): boolean => {
-		const { selectedLanguage, repos, error } = this.state;
-		return !repos[selectedLanguage] && error === null;
-	};
+	return (
+		<React.Fragment>
+			<LanguagesNav
+				selected={selectedLanguage}
+				onUpdateLanguage={setSelectedLanguage}
+			/>
 
-	render(): React.ReactNode {
-		const { selectedLanguage, repos, error } = this.state;
-		return (
-			<React.Fragment>
-				<LanguagesNav
-					selected={selectedLanguage}
-					onUpdateLanguage={this.updateLanguage}
-				/>
+			{isLoading() && <Loading text="Fetching Repos" />}
 
-				{this.isLoading() && <Loading text="Fetching Repos" />}
+			{state.error && <p className="center-text error">{state.error}</p>}
 
-				{error && <p className="center-text error">{error}</p>}
-
-				{repos[selectedLanguage] && (
-					<ReposGrid repos={repos[selectedLanguage]} />
-				)}
-			</React.Fragment>
-		);
-	}
-}
+			{state[selectedLanguage] && (
+				<ReposGrid repos={state[selectedLanguage]} />
+			)}
+		</React.Fragment>
+	);
+};
+export default Popular;

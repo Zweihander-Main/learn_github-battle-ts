@@ -15,46 +15,41 @@ const Results = React.lazy(() => import('./components/Results'));
  *
  * @class      App (name)
  */
-export default class App extends React.Component<Record<null, null>, AppState> {
-	state = {
-		theme: 'light',
-		toggleTheme: (): void => {
-			this.setState(({ theme }: AppState) => ({
-				theme: theme === 'light' ? 'dark' : 'light',
-			}));
-		},
-	} as AppState;
+const App: React.FC = () => {
+	const [theme, setTheme] = React.useState<AppState>('light');
 
-	render(): React.ReactNode {
-		return (
-			<Router>
-				<ThemeProvider value={this.state}>
-					<div className={this.state.theme}>
-						<div className="container">
-							<Nav />
-							<React.Suspense fallback={<Loading />}>
-								<Switch>
-									<Route exact path="/" component={Popular} />
-									<Route
-										exact
-										path="/battle"
-										component={Battle}
-									/>
-									<Route
-										path="/battle/results"
-										component={Results}
-									/>
-									<Route
-										render={(): React.ReactNode => (
-											<h1>404</h1>
-										)}
-									/>
-								</Switch>
-							</React.Suspense>
-						</div>
+	const toggleTheme = (): void => {
+		setTheme((theme) => (theme === 'light' ? 'dark' : 'light'));
+	};
+
+	return (
+		<Router>
+			<ThemeProvider value={theme}>
+				<div className={theme}>
+					<div className="container">
+						<Nav toggleTheme={toggleTheme} />
+						<React.Suspense fallback={<Loading />}>
+							<Switch>
+								<Route exact path="/" component={Popular} />
+								<Route
+									exact
+									path="/battle"
+									component={Battle}
+								/>
+								<Route
+									path="/battle/results"
+									component={Results}
+								/>
+								<Route
+									render={(): React.ReactNode => <h1>404</h1>}
+								/>
+							</Switch>
+						</React.Suspense>
 					</div>
-				</ThemeProvider>
-			</Router>
-		);
-	}
-}
+				</div>
+			</ThemeProvider>
+		</Router>
+	);
+};
+
+export default App;

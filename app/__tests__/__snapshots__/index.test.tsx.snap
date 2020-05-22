@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App matches snapshot 1`] = `
+exports[`Popular and battle pages match snapshots 1`] = `
 <DocumentFragment>
   <div
     class="light"
@@ -28,6 +28,57 @@ exports[`App matches snapshot 1`] = `
             <a
               class="nav-link"
               href="/battle"
+            >
+              Battle
+            </a>
+          </li>
+        </ul>
+        <button
+          class="btn-clear"
+          style="font-size: 30px;"
+        >
+          🔦
+        </button>
+      </nav>
+      <p
+        style="font-size: 35px; position: absolute; left: 0px; right: 0px; margin-top: 20px; text-align: center;"
+      >
+        Loading
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Popular and battle pages match snapshots 2`] = `
+<DocumentFragment>
+  <div
+    class="light"
+  >
+    <div
+      class="container"
+    >
+      <nav
+        class="row space-between"
+      >
+        <ul
+          class="row nav"
+        >
+          <li>
+            <a
+              class="nav-link"
+              href="/"
+              style=""
+            >
+              Popular
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="nav-link active"
+              href="/battle"
+              style="color: rgb(187, 46, 31);"
             >
               Battle
             </a>
